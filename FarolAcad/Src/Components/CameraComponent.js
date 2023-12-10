@@ -3,8 +3,11 @@ import { Camera } from 'expo-camera';
 import { View, Text, TouchableOpacity, StyleSheet, Button, Image } from 'react-native';
 import { Icon } from 'react-native-paper';
 import  axios  from 'axios';
+import request from '../Servico/Request';
 
-export default function CameraComponent() {
+
+export default function CameraComponent({route}) {
+    const usrID = route.params;
   const [type, setType] = useState(Camera.Constants.Type.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [photo, setPhoto] = useState(null);
@@ -61,12 +64,24 @@ export default function CameraComponent() {
           'Content-Type': 'multipart/form-data',
         },
         params: {
-          upload_preset: 'ml_default', // Substitua pelo seu upload preset
+          upload_preset: 'ml_default', 
         },
       }).then(resp =>{
-        console.log(resp)
         const imageUrl = resp.data.url;
-        console.log(imageUrl);
+        try{
+            const uploadusr =  request.put(`usuario/${usrID}`, {
+                foto: imageUrl,
+              })
+            .then(foi =>{
+            })
+            .catch(e=>{
+            })
+
+        }catch{
+            console.warn("nem chegou a tenter mudar user");
+
+        }
+
       })
       
   

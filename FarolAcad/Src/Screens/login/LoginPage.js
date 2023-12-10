@@ -17,7 +17,7 @@ function LoginPage () {
   
       const log = await request.post('usuario/login/', data)
       .then(r =>{
-        navigation.navigate('PainelUsuario');
+        navigation.navigate('PainelUsuario', data.email);
       })
       .catch(e =>{
         console.error("nao bateu la");
