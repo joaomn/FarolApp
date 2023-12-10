@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { Camera } from 'expo-camera';
 import { View, Text, TouchableOpacity, StyleSheet, Button, Image } from 'react-native';
+import { Icon } from 'react-native-paper';
+import  axios  from 'axios';
 
 export default function CameraComponent() {
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -16,7 +18,8 @@ export default function CameraComponent() {
   if (!permission.granted) {
     return (
       <View style={styles.container}>
-        <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+        <Text style={{ textAlign: 'center' }}>É preciso que voce permita que a plataforma
+        use sua camera, não se preocupe ela só será usada durante o uso do aplicativo.</Text>
         <Button onPress={requestPermission} title="Grant Permission" />
       </View>
     );
@@ -43,12 +46,36 @@ export default function CameraComponent() {
     setShowSaveButton(false); // Esconder o botão de salvar ao redefinir a foto
   }
 
-  function savePhoto() {
-    // Lógica para enviar a foto para o Cloudinary
-    // Substitua este trecho com a lógica real de envio para o Cloudinary
-    console.log('Salvando foto:', photo);
+  async function savePhoto() {
+    
+    try {
+      const formData = new FormData();
+      formData.append('file', {
+        uri: photo,
+        type: 'image/jpeg',
+        name: 'photo.jpg',
+      });
+  
+      const response = await axios.post('https://api.cloudinary.com/v1_1/dbpsqttrs/image/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        params: {
+          upload_preset: 'ml_default', // Substitua pelo seu upload preset
+        },
+      }).then(resp =>{
+        console.log(resp)
+        const imageUrl = resp.data.url;
+        console.log(imageUrl);
+      })
+      
+  
+      
+      
+    } catch (error) {
+      console.error(error);
+    }
   }
-
   return (
     <View style={styles.container}>
       <View style={styles.cameraContainer}>
@@ -62,18 +89,38 @@ export default function CameraComponent() {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
+            <Icon
+            source="camera-flip"
+            color={'#FFF'}
+            size={25}
+             />
           <Text style={styles.text}>Alterar Câmera</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={takePicture}>
+        <Icon
+            source="camera-enhance"
+            color={'#FFF'}
+            size={25}
+             />
           <Text style={styles.text}>Capturar!</Text>
         </TouchableOpacity>
         {showSaveButton && (
           <TouchableOpacity style={styles.button} onPress={savePhoto}>
+             <Icon
+            source="camera"
+            color={'#FFF'}
+            size={25}
+             />
             <Text style={styles.text}>Definir foto de Perfil</Text>
           </TouchableOpacity>
         )}
         {photo && (
           <TouchableOpacity style={styles.button} onPress={resetPhoto}>
+             <Icon
+            source="camera-retake"
+            color={'#FFF'}
+            size={25}
+             />
             <Text style={styles.text}>Capturar novamente</Text>
           </TouchableOpacity>
         )}
@@ -86,6 +133,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#baf7ca',
   },
   cameraContainer: {
     width: '100%',
@@ -106,14 +154,16 @@ const styles = StyleSheet.create({
     margin: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#eee',
+    backgroundColor: '#e9f763',
     padding: 10,
     borderRadius: 5,
+    flexDirection: 'row',
+    gap: 5
   },
   text: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#000',
+    color: '#FFF',
   },
   previewContainer: {
     flex: 1,
