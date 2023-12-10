@@ -20,7 +20,7 @@ function LoginPage () {
         navigation.navigate('PainelUsuario', data.email);
       })
       .catch(e =>{
-        console.error("nao bateu la");
+        alert("Usuario ou Senha incorretos")
       })
   
     }catch{
