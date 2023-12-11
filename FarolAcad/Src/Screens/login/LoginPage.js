@@ -1,5 +1,5 @@
 import { Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React,{useState} from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {  Card, Button, TextInput, Snackbar } from 'react-native-paper';
 import { useForm, Controller} from 'react-hook-form';
@@ -15,6 +15,7 @@ function LoginPage () {
   const onToggleSnackBar = () => setVisible(!visible);
 
   const onDismissSnackBar = () => setVisible(false);
+  const [isPasswordVisible, setPasswordVisible] = useState(false);
 
   const navigation = useNavigation();
   async function logar(data) {
@@ -63,15 +64,16 @@ function LoginPage () {
                 control={control}
                 name='password'
                 render={({field: {onChange, onBlur,value}}) => (
-               <TextInput
-                 style={styles.input}
-                 onChangeText={onChange}
-                 onBlur={onBlur}
-                 value={value}
-                 placeholder='Digite sua Senha'
-                 secureTextEntry={true}
-                 underlineColor='transparent'
-                 />
+                  <TextInput
+                  style={styles.input}
+                  onChangeText={onChange}
+                  onBlur={onBlur}
+                  value={value}
+                  underlineColor='transparent'
+                  placeholder='Digite sua Senha'
+                  secureTextEntry={!isPasswordVisible}
+                  right={<TextInput.Icon icon={isPasswordVisible ? 'eye-off' : 'eye'} onPress={()=>{ setPasswordVisible(!isPasswordVisible)}} />}
+                  />
             )}
             />
              <Button icon="account-plus" mode="elevated" buttonColor='#03ad14' textColor='#FFF' onPress={handleSubmit(logar) }>

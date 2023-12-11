@@ -6,6 +6,7 @@ import  axios  from 'axios';
 import request from '../Servico/Request';
 
 
+
 export default function CameraComponent({route}) {
     const usrID = route.params;
   const [type, setType] = useState(Camera.Constants.Type.back);
@@ -23,7 +24,7 @@ export default function CameraComponent({route}) {
       <View style={styles.container}>
         <Text style={{ textAlign: 'center' }}>É preciso que voce permita que a plataforma
         use sua camera, não se preocupe ela só será usada durante o uso do aplicativo.</Text>
-        <Button onPress={requestPermission} title="Grant Permission" />
+        <Button onPress={requestPermission} title="Concender Permissão" />
       </View>
     );
   }
@@ -73,6 +74,8 @@ export default function CameraComponent({route}) {
                 foto: imageUrl,
               })
             .then(foi =>{
+              alert("Foto Alterada Com sucesso")
+              
             })
             .catch(e=>{
             })
@@ -105,7 +108,7 @@ export default function CameraComponent({route}) {
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={toggleCameraType}>
             <Icon
-            source="camera-flip"
+            source="camera-front-variant"
             color={'#FFF'}
             size={25}
              />

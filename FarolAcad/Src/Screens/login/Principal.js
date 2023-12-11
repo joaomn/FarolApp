@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     botaoCadastro:{
       width: 200,
       alignItems: 'stretch',
-      backgroundColor: '#36bf2c',
+      backgroundColor: '#094fdb',
       justifyContent: 'flex-end',
       left:90,
       marginTop: 15
