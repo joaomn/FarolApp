@@ -1,4 +1,4 @@
-import { Text, View , StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Image} from 'react-native'
+import { Text, View , StyleSheet, Image, Modal} from 'react-native'
 import React, {  useEffect, useState, useCallback  } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { TextInput, Card, Button } from 'react-native-paper';
@@ -41,13 +41,19 @@ const { control, handleSubmit, formState: {errors}} = useForm({
 
 const [isPasswordVisible, setPasswordVisible] = useState(false);
 
- async function persistir(data) {
+const [isDeleteModalVisible, setDeleteModalVisible] = useState(false);
+
+async function deletarModal() {
+    setDeleteModalVisible(true);
+  }
+
+ async function alterar(data) {
   try{
 
     const pers = await request.put(`usuario/${usr.id}`, data)
     .then(r =>{
       alert(" Alterado Com sucesso")
-      navigation.navigate('PainelUsuario', usrEmail);
+      navigation.navigate('PainelUsuario', usr.email);
     })
     .catch(e =>{
       console.log("nao bateu la");
@@ -56,6 +62,23 @@ const [isPasswordVisible, setPasswordVisible] = useState(false);
   }catch{
   }
 }
+
+async function deletar() {
+    setDeleteModalVisible(false);
+    try{
+  
+      const pers = await request.delete(`usuario/${usr.id}`)
+      .then(r =>{
+        alert("Deletado com Sucesso, foi um Prazer ter tido voce conosco!")
+        navigation.navigate('Home');
+      })
+      .catch(e =>{
+        console.log("nao bateu la");
+      })
+  
+    }catch{
+    }
+  }
   return (
     <SafeAreaProvider style={styles.container}>
       <Image style={styles.logo} source={require('../../../assets/farolacad.png')} resizeMode="cover"/>
@@ -121,13 +144,49 @@ const [isPasswordVisible, setPasswordVisible] = useState(false);
                  />
             )}
             />
-            <Button icon="account-plus" mode="elevated" buttonColor='#03ad14' textColor='#FFF' onPress={handleSubmit(persistir) }>
-                Cadastrar
+            <Button icon="account-edit" mode="elevated" buttonColor='#dbc609' textColor='#FFF' onPress={handleSubmit(alterar) }>
+                Editar
+            </Button>
+            <Button icon="account-remove" mode="elevated" buttonColor='#b80c09' style={{marginTop : 10}} textColor='#FFF' onPress={deletarModal}>
+                Deletar
             </Button>
 
             
         </Card>
 </View>
+<Modal
+        transparent={true}
+        animationType="slide"
+        visible={isDeleteModalVisible}
+        onRequestClose={() => setDeleteModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <Card style={styles.modalCard}>
+            <Text style={styles.modalTitle}>Excluir Conta</Text>
+            <Text style={styles.modalText}>
+              Tem certeza que deseja deletar este usuário?
+             
+            </Text>
+            <Button
+              icon="check"
+              mode="contained"
+              buttonColor="#b80c09"
+              onPress={deletar}
+            >
+              Confirmar
+            </Button>
+            <Button
+              icon="cancel"
+              mode="contained"
+              buttonColor="#666"
+              onPress={() => setDeleteModalVisible(false)}
+              style={{ marginTop: 10 }}
+            >
+              Cancelar
+            </Button>
+          </Card>
+        </View>
+      </Modal>
 </SafeAreaProvider>
   ) 
 };
@@ -174,5 +233,26 @@ const styles = StyleSheet.create({
         width: '40%',
         height:'19%',
         marginTop: 20
+      },
+      modalContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      },
+      modalCard: {
+        padding: 20,
+        borderRadius: 10,
+        width: '80%',
+        backgroundColor: '#FFF',
+      },
+      modalTitle: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginBottom: 10,
+      },
+      modalText: {
+        fontSize: 16,
+        marginBottom: 20,
       }
   });
