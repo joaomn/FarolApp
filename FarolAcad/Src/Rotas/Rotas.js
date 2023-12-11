@@ -8,8 +8,7 @@ import CadastroUsuario from '../Screens/Cadastro.js/CadastroUsuario';
 import LoginPage from '../Screens/login/LoginPage'
 import PainelUsuario from '../Screens/PainelUsuario/PainelUsuario';
 import CameraComponent from '../Components/CameraComponent';
-
-
+import RecuperarSenha from '../Screens/login/RecuperarSenha';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +21,8 @@ const Rotas = () => {
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="Login" component={LoginPage} />
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="PainelUsuario" component={PainelUsuario} />
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="Camera" component={CameraComponent} />
+        <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="RecuperarSenha" component={RecuperarSenha} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

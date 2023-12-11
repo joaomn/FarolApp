@@ -1,7 +1,7 @@
 import { Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, {useState}from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import {  Card, Button, TextInput, Snackbar } from 'react-native-paper';
+import {  Card, Button, TextInput, Snackbar,ActivityIndicator } from 'react-native-paper';
 import { useForm, Controller} from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
 import request from '../../Servico/Request';
@@ -11,39 +11,40 @@ import request from '../../Servico/Request';
 
 function LoginPage () {
   const [visible, setVisible] = React.useState(false);
-
-  const onToggleSnackBar = () => setVisible(!visible);
-
+  const [loading, setLoading] = useState(false);
   const onDismissSnackBar = () => setVisible(false);
 
   const navigation = useNavigation();
-  async function logar(data) {
-   
+  async function recuperarSenha(data) {
     try{
-  
-      const log = await request.post('usuario/login/', data)
+        setLoading(true);
+      const log = await request.post(`usuario/${data.email}/senha`)
       .then(r =>{
-        navigation.navigate('PainelUsuario', data.email);
+        alert("Senha Recuperada com Sucesso")
+        navigation.navigate('Login');
+
       })
       .catch(e =>{
         setVisible(true);
       })
-  
     }catch{
       console.log("nem foi")
-  
+    }finally{
+        setLoading(false);
     }
   }
-
   const { control, handleSubmit, formState: {errors}} = useForm({
   });
-  
     return (
       <SafeAreaProvider style={styles.container}>
         <Image style={styles.logo} source={require('../../../assets/farolacad.png')} resizeMode="cover"/>
          <View style={styles.content}>
-         <Text style={styles.titulo}>Login Page</Text>
+         <Text style={styles.titulo}>Recuperar Senha</Text>
         <Card style={styles.card}>
+            <Text style={styles.recoverContainer}> Esqueceu sua senha? não se preocupe, digite seu email cadastrado
+                que te enviaremos uma novinha!
+            </Text>
+            {loading && <ActivityIndicator animating={true} color="#078856" style={{margin: 20}} size='70'/>}
         <Controller
             control={control}
             name='email'
@@ -58,33 +59,10 @@ function LoginPage () {
                  />
             )}
             />
-
-              <Controller
-                control={control}
-                name='password'
-                render={({field: {onChange, onBlur,value}}) => (
-               <TextInput
-                 style={styles.input}
-                 onChangeText={onChange}
-                 onBlur={onBlur}
-                 value={value}
-                 placeholder='Digite sua Senha'
-                 secureTextEntry={true}
-                 underlineColor='transparent'
-                 />
-            )}
-            />
-             <Button icon="account-plus" mode="elevated" buttonColor='#03ad14' textColor='#FFF' onPress={handleSubmit(logar) }>
-                Entrar
+             <Button icon="email-send" mode="elevated" buttonColor='#100dbf' textColor='#FFF' onPress={handleSubmit(recuperarSenha) }>
+                Enviar
+               
             </Button>
-
-            <TouchableOpacity style={styles.recoverContainer} onPress={() => navigation.navigate('RecuperarSenha')}>
-              <Text style={styles.recover}>
-                Esqueceu sua senha? clique aqui
-              </Text>
-            </TouchableOpacity>
-
-
         </Card>
       </View>
       <Snackbar
@@ -94,7 +72,7 @@ function LoginPage () {
           label: 'Fechar',
           onPress: onDismissSnackBar,
         }}>
-        Usuário ou senha incorretos.
+        Email incorreto ou não cadastrado.
       </Snackbar>
       </SafeAreaProvider>
      
@@ -134,7 +112,7 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: '#000',
     borderWidth: 1,
-    marginBottom: 10,
+    marginBottom: 20,
     padding: 10,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
@@ -147,14 +125,13 @@ const styles = StyleSheet.create({
     height:'19%',
     marginTop: 20
   },
-  recover:{
-    color: 'blue',
-    textDecorationLine: 'underline',
-    marginTop: 5,
-    fontStyle: 'italic',
-  },
+  
   recoverContainer: {
     alignItems: 'center', // Centraliza os itens horizontalmente
-    marginTop: 20, // Ajuste conforme necessário
+    margin: 10,
+    marginTop: 0, 
+    fontSize: 20,
+    fontStyle: 'italic',
+
   },
 })
