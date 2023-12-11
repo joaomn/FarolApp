@@ -96,7 +96,7 @@ export default function PainelUsuario({route}) {
       <Button icon="file-certificate" textColor='#000' compact={true}  mode="elevated" onPress={() => console.log('Pressed')}>
         Certificados
       </Button>
-      <Button icon="account-edit" textColor='#000' compact={true} mode="elevated" onPress={() => console.log('Pressed')}>
+      <Button icon="account-edit" textColor='#000' compact={true} mode="elevated" onPress={() => navigation.navigate('EditarUsuario', usrEmail)}>
         Editar Perfil
        </Button>
     </View>

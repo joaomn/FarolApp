@@ -23,11 +23,11 @@ const [isPasswordVisible, setPasswordVisible] = useState(false);
 
     const pers = await request.post('usuario', data)
     .then(r =>{
-      alert(data.nome + "Cadastrado com sucesso!")
+      alert(data.nome + " Cadastrado com sucesso!")
       navigation.navigate('Principal');
     })
     .catch(e =>{
-      console.error("nao bateu la");
+      console.log("nao bateu la");
     })
 
   }catch{
