@@ -1,7 +1,7 @@
 import { Text, StyleSheet, View, Image, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import {  Card, Button, TextInput } from 'react-native-paper';
+import {  Card, Button, TextInput, Snackbar } from 'react-native-paper';
 import { useForm, Controller} from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
 import request from '../../Servico/Request';
@@ -10,6 +10,12 @@ import request from '../../Servico/Request';
 
 
 function LoginPage () {
+  const [visible, setVisible] = React.useState(false);
+
+  const onToggleSnackBar = () => setVisible(!visible);
+
+  const onDismissSnackBar = () => setVisible(false);
+
   const navigation = useNavigation();
   async function logar(data) {
    
@@ -20,7 +26,7 @@ function LoginPage () {
         navigation.navigate('PainelUsuario', data.email);
       })
       .catch(e =>{
-        alert("Usuario ou Senha incorretos")
+        setVisible(true);
       })
   
     }catch{
@@ -81,6 +87,15 @@ function LoginPage () {
 
         </Card>
       </View>
+      <Snackbar
+        visible={visible}
+        onDismiss={onDismissSnackBar}
+        action={{
+          label: 'Fechar',
+          onPress: onDismissSnackBar,
+        }}>
+        Usuário ou senha incorretos.
+      </Snackbar>
       </SafeAreaProvider>
      
     )
