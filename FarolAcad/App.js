@@ -4,6 +4,8 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import Rotas from './Src/Rotas/Rotas'
 import PainelUsuario from "./Src/Screens/PainelUsuario/PainelUsuario";
 import CameraComponent from "./Src/Components/CameraComponent";
+import { StatusBar } from "react-native";
+
 
 
 
@@ -11,6 +13,7 @@ import CameraComponent from "./Src/Components/CameraComponent";
 export default function App() {
   return (
     <SafeAreaProvider>
+      <StatusBar />
 
       <Rotas />
 
