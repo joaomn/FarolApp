@@ -90,13 +90,13 @@ export default function PainelUsuario({route}) {
         />
     </View>
     <View style={styles.buttons}>
-        <Button icon="google-classroom" textColor='#000' compact={true}  mode="elevated" onPress={() => console.log('Pressed')}>
+        <Button icon="google-classroom" textColor='#000' compact={true} buttonColor='#6e99bf' mode="elevated" onPress={() => console.log('Pressed')}>
         Cursos
        </Button>
-      <Button icon="file-certificate" textColor='#000' compact={true}  mode="elevated" onPress={() => console.log('Pressed')}>
+      <Button icon="file-certificate" textColor='#000' compact={true} buttonColor='#99BF6E'  mode="elevated" onPress={() => console.log('Pressed')}>
         Certificados
       </Button>
-      <Button icon="account-edit" textColor='#000' compact={true} mode="elevated" onPress={() => navigation.navigate('EditarUsuario', usrEmail)}>
+      <Button icon="account-edit" textColor='#000' compact={true} buttonColor='#BF956E' mode="elevated" onPress={() => navigation.navigate('EditarUsuario', usrEmail)}>
         Editar Perfil
        </Button>
     </View>
@@ -109,7 +109,7 @@ export default function PainelUsuario({route}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#9ed69c',
+    backgroundColor: '#d4fcd7',
   },
   avatarContainer: {
     width: 150,
@@ -195,9 +195,14 @@ const styles = StyleSheet.create({
     
   },
   buttons:{
-    felx: 1,
+    felx: 2,
     marginBottom: 50,
     gap: 15,
-    marginTop: -60
+    marginTop: -60,
+    width:'90%',
+    justifyContent: 'center',
+    alignContent: 'center',
+    flexDirection: 'column',
+    marginLeft: 18
   }
 });
