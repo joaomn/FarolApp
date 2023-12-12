@@ -9,6 +9,7 @@ import PainelUsuario from '../Screens/PainelUsuario/PainelUsuario';
 import CameraComponent from '../Components/CameraComponent';
 import RecuperarSenha from '../Screens/login/RecuperarSenha';
 import EditarUsuario from '../Screens/Cadastro.js/EditarUsuario';
+import CursosPrincipal from '../Screens/Cursos/CursosPrincipal';
 
 
 
@@ -25,6 +26,7 @@ const Rotas = () => {
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="Camera" component={CameraComponent} />
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="RecuperarSenha" component={RecuperarSenha} />
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="EditarUsuario" component={EditarUsuario} />
+        <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="CursosPrincipal" component={CursosPrincipal} />
 
       </Stack.Navigator>
     </NavigationContainer>

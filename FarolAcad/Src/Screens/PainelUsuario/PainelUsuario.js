@@ -90,7 +90,7 @@ export default function PainelUsuario({route}) {
         />
     </View>
     <View style={styles.buttons}>
-        <Button icon="google-classroom" textColor='#000' compact={true} buttonColor='#6e99bf' mode="elevated" onPress={() => console.log('Pressed')}>
+        <Button icon="google-classroom" textColor='#000' compact={true} buttonColor='#6e99bf' mode="elevated" onPress={() => navigation.navigate('CursosPrincipal')}>
         Cursos
        </Button>
       <Button icon="file-certificate" textColor='#000' compact={true} buttonColor='#99BF6E'  mode="elevated" onPress={() => console.log('Pressed')}>
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 75,
     overflow: 'hidden',
-    marginTop: 70,
+    marginTop: 50,
     justifyContent: 'flex-start',
     alignContent:'center',
     
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     
   },
   buttons:{
-    felx: 2,
+    felx: 1,
     marginBottom: 50,
     gap: 15,
     marginTop: -60,
