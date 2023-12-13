@@ -83,7 +83,7 @@ async function deletar() {
     <SafeAreaProvider style={styles.container}>
       <Image style={styles.logo} source={require('../../../assets/farolacad.png')} resizeMode="cover"/>
         <View style={styles.content}>
-            <Text style={styles.titulo}>Cadastro de Usuário</Text>
+            <Text style={styles.titulo}>Edição de Usuário</Text>
         <Card style={styles.card}>
             <Controller
             control={control}

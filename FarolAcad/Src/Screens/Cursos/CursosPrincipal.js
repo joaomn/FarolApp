@@ -15,7 +15,6 @@ const CursosPrincipal = () => {
       try {
         const response = await request.get('curso'); // Substitua pela URL real da sua API
         const data = response.data;
-        console.log(data)
 
         setCourses(data);
       } catch (error) {
@@ -92,9 +91,12 @@ const styles = StyleSheet.create({
   },
   courseArea: {
     fontSize: 16,
+    fontWeight:'500'
+    
   },
   courseHours: {
     fontSize: 16,
+    fontWeight:'500'
   },
 });
 
