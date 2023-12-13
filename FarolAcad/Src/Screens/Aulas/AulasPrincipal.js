@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, Image, TouchableOpacity, Button } from 'react-native';
 import request from '../../Servico/Request';
+import { useNavigation } from '@react-navigation/native';
+import { Checkbox } from 'react-native-paper';
 
 
-export default function AulasPrincipal({ route, navigation }) {
+export default function AulasPrincipal({ route }) {
   const cursoID = route.params;
-
+  const navigation = useNavigation();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,47 +37,57 @@ export default function AulasPrincipal({ route, navigation }) {
 
   const [aulas, setAulas] = useState([]);
   const [cursoo, setCursoo] = useState([]);
+  const [checked, setChecked] = React.useState(false);
 
  
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => openAula(item.link)}>
+    <TouchableOpacity onPress={() => navigation.navigate('AulaPage', item.id)}>
       <View style={styles.aulaCard}>
         <Text style={styles.aulaNome}>{item.titulo}</Text>
       </View>
     </TouchableOpacity>
   );
 
-  const openAula = (link) => {
-    // Implemente a lógica para abrir o link do YouTube ou navegar para outra tela, se necessário
-    console.log('Abrindo aula:', link);
-  };
+  
 
   return (
     <View style={styles.container}>
-      <Text style={styles.cursoTitle}>Aulas de {cursoo.nome}</Text>
-      <FlatList
-        data={aulas}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => openAula(item.link)}
-            style={styles.aulaCard}
-          >
-            <Text style={styles.aulaNome}>{item.titulo}</Text>
-          </TouchableOpacity>
-        )}
-      />
-      {aulas.length > 0 && (
+    <Text style={styles.cursoTitle}>Aulas de {cursoo.nome}</Text>
+    <FlatList
+      data={aulas}
+      keyExtractor={(item) => item.id.toString()}
+      renderItem={({ item }) => (
         <TouchableOpacity
-          style={styles.botaoProva}
-          onPress={() => navigation.navigate('PaginaDeProva')}
-          disabled={aulas.length === 0 || aulas.length - 1 !== aulas.length - 1}
+          onPress={() => navigation.navigate('AulaPage', item.id)}
+          style={styles.aulaCard}
         >
-          <Text style={styles.botaoTexto}>Ir para a Prova</Text>
+          <Text style={styles.aulaNome}>{item.titulo}</Text>
         </TouchableOpacity>
       )}
+    />
+
+    <View style={styles.checkboxContainer}>
+      <Checkbox
+        color='#078856'
+        status={checked ? 'checked' : 'unchecked'}
+        onPress={() => {
+          setChecked(!checked);
+        }}
+      />
+      <Text style={styles.checkboxLabel}>Declaro que assisti todas as aulas</Text>
     </View>
+
+    {aulas.length > 0 && (
+      <TouchableOpacity
+        style={[styles.botaoProva, { backgroundColor: checked ? '#094fdb' : '#999' }]}
+        onPress={() => navigation.navigate('PaginaDeProva', cursoID)}
+        disabled={!checked}
+      >
+        <Text style={styles.botaoTexto}>Ir para a Prova</Text>
+      </TouchableOpacity>
+    )}
+  </View>
   );
 }
 
@@ -85,6 +97,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#d4fcd7',
+    zIndex: 20
   },
   cursoTitle: {
     fontSize: 20,
@@ -95,6 +108,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: '95%',
     marginLeft: 5,
+    zIndex: 9999
   },
   aulaCard: {
     backgroundColor: '#dbb509',
@@ -130,5 +144,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     color: '#FFF',
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  checkboxLabel: {
+    marginLeft: 8,
+    fontSize: 16,
+    color: '#3d3a3a',
+    fontWeight: 'bold'
   },
 });

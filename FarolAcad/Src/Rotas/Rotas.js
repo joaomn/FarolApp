@@ -11,6 +11,9 @@ import RecuperarSenha from '../Screens/login/RecuperarSenha';
 import EditarUsuario from '../Screens/Cadastro.js/EditarUsuario';
 import CursosPrincipal from '../Screens/Cursos/CursosPrincipal';
 import AulasPrincipal from '../Screens/Aulas/AulasPrincipal';
+import AulaPagina from '../Screens/Aulas/AulaPagina';
+import Porvapage from '../Screens/Provas/Porvapage';
+
 
 
 
@@ -31,7 +34,8 @@ const Rotas = () => {
         name="CursosPrincipal" component={CursosPrincipal} />
         <Stack.Screen options={{headerTitle: 'Aulas', headerStyle:{backgroundColor: '#078856'}}} 
         name="AulasPrincipal" component={AulasPrincipal} />
-
+        <Stack.Screen options={{headerTitle: 'Aula', headerStyle:{backgroundColor: '#078856'}}} name="AulaPage" component={AulaPagina} />
+        <Stack.Screen  options={{headerTitle: 'Prova', headerStyle:{backgroundColor: '#078856'}}} name="PaginaDeProva" component={Porvapage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

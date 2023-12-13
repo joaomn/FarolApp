@@ -5,6 +5,7 @@ import Rotas from './Src/Rotas/Rotas'
 import PainelUsuario from "./Src/Screens/PainelUsuario/PainelUsuario";
 import CameraComponent from "./Src/Components/CameraComponent";
 import { StatusBar } from "react-native";
+import ProvaPage from "./Src/Screens/Provas/Porvapage";
 
 
 
