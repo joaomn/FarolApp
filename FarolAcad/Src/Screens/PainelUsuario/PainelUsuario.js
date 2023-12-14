@@ -78,7 +78,7 @@ export default function PainelUsuario({route}) {
         <Text style={{ fontSize: 25 }}>
           {usr.rank}
         </Text>
-        <Icon source='podium' size={80}/>
+        <Icon source='podium' color='#f0de43' size={80}/>
       </View>
     </View>
     <View style={styles.containerInfo}>

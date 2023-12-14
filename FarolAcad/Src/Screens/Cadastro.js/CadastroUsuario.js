@@ -63,7 +63,7 @@ const openDatePicker = () => {
                  value={value}
                  placeholder='Digite seu nome'
                  underlineColor='transparent'
-                 mode= 'outlined'
+                 mode= 'flat'
                  />
             )}
             />
@@ -108,6 +108,7 @@ const openDatePicker = () => {
                  value={value}
                  placeholder='Digite seu CPF'
                  underlineColor='transparent'
+                 keyboardType='numeric'
                  />
             )}
             />
