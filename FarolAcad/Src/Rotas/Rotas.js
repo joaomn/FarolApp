@@ -13,6 +13,8 @@ import CursosPrincipal from '../Screens/Cursos/CursosPrincipal';
 import AulasPrincipal from '../Screens/Aulas/AulasPrincipal';
 import AulaPagina from '../Screens/Aulas/AulaPagina';
 import Porvapage from '../Screens/Provas/Porvapage';
+import CertificadoPrincipal from '../Screens/Certificado/CertificadoPrincipal';
+
 
 
 
@@ -36,6 +38,8 @@ const Rotas = () => {
         name="AulasPrincipal" component={AulasPrincipal} />
         <Stack.Screen options={{headerTitle: 'Aula', headerStyle:{backgroundColor: '#078856'}}} name="AulaPage" component={AulaPagina} />
         <Stack.Screen  options={{headerTitle: 'Prova', headerStyle:{backgroundColor: '#078856'}}} name="PaginaDeProva" component={Porvapage} />
+        <Stack.Screen options={{headerTitle: 'Certificados', headerStyle:{backgroundColor: '#078856'}}} 
+        name="CertificadoPrincipal" component={CertificadoPrincipal} />
       </Stack.Navigator>
     </NavigationContainer>
   );

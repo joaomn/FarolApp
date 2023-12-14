@@ -11,9 +11,9 @@ export default function PainelUsuario({route}) {
     const navigation = useNavigation();
    const usrEmail = route.params;
 
+
    const [usr, setUsr] = useState({});
     useEffect(() => {
-        // Essa função será executada quando a página for montada
         carregarUsr(usrEmail);
       }, []);
       
@@ -93,7 +93,7 @@ export default function PainelUsuario({route}) {
         <Button icon="google-classroom" textColor='#000' compact={true} buttonColor='#6e99bf' mode="elevated" onPress={() => navigation.navigate('CursosPrincipal')}>
         Cursos
        </Button>
-      <Button icon="file-certificate" textColor='#000' compact={true} buttonColor='#99BF6E'  mode="elevated" onPress={() => console.log('Pressed')}>
+      <Button icon="file-certificate" textColor='#000' compact={true} buttonColor='#99BF6E'  mode="elevated" onPress={() => navigation.navigate('CertificadoPrincipal', usr.id)}>
         Certificados
       </Button>
       <Button icon="account-edit" textColor='#000' compact={true} buttonColor='#BF956E' mode="elevated" onPress={() => navigation.navigate('EditarUsuario', usrEmail)}>
