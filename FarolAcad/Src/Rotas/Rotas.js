@@ -29,7 +29,7 @@ const Rotas = () => {
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: '' }} name="Cadastro" component={CadastroUsuario} />
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="Login" component={LoginPage} />
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="PainelUsuario" component={PainelUsuario} />
-        <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="Camera" component={CameraComponent} />
+        <Stack.Screen options={{headerTitle: 'Camera', headerStyle:{backgroundColor: '#078856'}}} name="Camera" component={CameraComponent} />
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="RecuperarSenha" component={RecuperarSenha} />
         <Stack.Screen options={{ headerTransparent: true,  headerTitle: ''}} name="EditarUsuario" component={EditarUsuario} />
         <Stack.Screen options={{headerTitle: 'Cursos', headerStyle:{backgroundColor: '#078856'}}} 

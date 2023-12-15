@@ -151,13 +151,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#baf7ca',
+    backgroundColor: '#FFF',
   },
   cameraContainer: {
-    width: '100%',
+    width: '95%',
     aspectRatio: 1,
     overflow: 'hidden',
     flex: 0,
+    borderRadius:105,
+    borderColor: '#078856',
+    borderWidth: 5
   },
   camera: {
     flex: 1,
@@ -172,11 +175,12 @@ const styles = StyleSheet.create({
     margin: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e9f763',
+    backgroundColor: '#078856',
     padding: 10,
-    borderRadius: 5,
+    borderRadius: 75,
     flexDirection: 'row',
-    gap: 5
+    gap: 5,
+    
   },
   text: {
     fontSize: 18,

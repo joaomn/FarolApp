@@ -119,6 +119,8 @@ const styles = StyleSheet.create({
     marginTop: 50,
     justifyContent: 'flex-start',
     alignContent:'center',
+    borderWidth:3,
+    borderColor: '#078856'
     
   },
   containerFoto: {
